@@ -1,8 +1,8 @@
-import User from '../../models/user'
+const User = require('../../models/user')
 
 export const userResolver = {
     Query: {
-        users: async (root, {email}) => {
+        User: async (root, {email}) => {
             const user = await User
             .findOne({email: email})
 

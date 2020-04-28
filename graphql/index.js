@@ -1,5 +1,8 @@
-const user = require('./users/user')
-const UserResolvers = require('./users/resolver')
+const { gql } = require('apollo-server-express')
 
-export const typeDefs = [user]
-export const resolvers = [UserResolvers]
+const { user } = require('./users/user')
+const { userResolver } = require('./users/resolver')
+
+
+export const typeDefs = user
+export const resolvers = userResolver
