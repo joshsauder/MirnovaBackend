@@ -17,4 +17,8 @@ const userSchema = new mongoose.Schema({
     }
 })
 
+userSchema.pre("save", () => {
+    user.createdDate = new Date()
+})
+
 module.exports = mongoose.model('User', userSchema)
