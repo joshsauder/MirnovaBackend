@@ -1,6 +1,6 @@
 const { gql } = require('apollo-server-express')
 
-const { user } = require('./users/user')
+const { user } = require('./users/type')
 const { userResolver } = require('./users/resolver')
 
 

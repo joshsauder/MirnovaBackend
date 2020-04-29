@@ -1,10 +1,11 @@
 const mongoose = require('mongoose')
 
 const questions = {
+    id: Number,
     question: String,
     answer: String,
     points: Number,
-    images: String
+    images: [String]
 }
 
 const courseSchema = new mongoose.Schema({
