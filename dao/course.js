@@ -17,10 +17,7 @@ exports.postCourse = async (course) => {
     return newCourse
 }
 
-exports.updateQuestion = async (courseId, question) => {
-    const course = this.findCourseById(courseId)
-    course.questions[question.id] = {...question}
-            
+exports.updateCourse = async (course) => {
     await Course.update({_id: course._id}, course)
     return course
 }
