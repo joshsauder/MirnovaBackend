@@ -1,15 +1,17 @@
 const mongoose = require('mongoose')
 
 const questions = {
-    id: Number,
-    question: String,
+    questionId: Number,
+    question: {
+        type: String,
+        required: 'Question is Required'
+    },
     answer: String,
     points: Number,
     images: [String]
 }
 
 const courseSchema = new mongoose.Schema({
-    _id: String,
     name: String,
     dateAdded: Date,
     questions: [questions]

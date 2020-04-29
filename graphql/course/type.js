@@ -9,7 +9,7 @@ export const course = gql`
     }
 
     type Questions {
-        id: Int!
+        questionId: Int!
         question: String!
         answer: String
         points: Int
@@ -22,13 +22,12 @@ export const course = gql`
     }
 
     input CourseInput {
-        id: String
         name: String!
         questions: [QuestionInput]!
     }
 
     input QuestionInput {
-        id: Int!
+        questionId: Int!
         question: String!
         answer: String
         points: Int

@@ -14,12 +14,12 @@ export const courseResolver = {
 
     Mutation: {
         createCourse: async (root, {course}) => {
-            const newCourse = postCourse(course)
+            const newCourse = await postCourse(course)
             return newCourse
         },
         updateQuestion: async (root, {courseId, question}) => {
-            const course = findCourseById(courseId)
-            course.questions[question.id] = {...question}
+            const course = await findCourseById(courseId)
+            course.questions[question.questionId] = {...question}
 
             const updatedCourse = await updateCourse(course)
             return updatedCourse
