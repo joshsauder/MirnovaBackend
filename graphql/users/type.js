@@ -9,11 +9,17 @@ export const user = gql`
         createdDate: String!
     }
 
+    input InputUser { 
+        email: String!
+        name: String!
+        age: String!
+    }
+
     extend type Query {
         User(email: String!): User
     }
 
     extend type Mutation {
-        createUser(email: String!, name: String!, dob: String): User
+        createUser(user: InputUser!): User
     } 
 `

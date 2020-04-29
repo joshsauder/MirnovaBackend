@@ -1,21 +1,17 @@
-const User = require('../../models/user')
+const {findUserByEmail, saveUser} = require('../../dao/user')
 
 export const userResolver = {
     Query: {
         User: async (root, {email}) => {
-            const user = await User
-            .findOne({email: email})
-
+            const user = findUserByEmail(email)
             return user
         }
     },
 
     Mutation: {
-        createUser: async(root, {email, name, dob}) => {
-            const user = new User({email, name, dob})
-            await user.save()
-
-            return user
+        createUser: async (root, {user}) => {
+            const newUser = saveUser(user)
+            return newUser
         }
     }
 }

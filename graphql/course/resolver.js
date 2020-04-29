@@ -1,29 +1,24 @@
-const Course = require('../../models/course')
+const {findCourseById, findAllCourses, postCourse, updateQuestion} = require('../../dao/course')
 
 export const courseResolver = {
     Query: {
         Course: async (root, {id}) => {
-            const course = Course.findById(id)
+            const course = await findCourseById(id)
             return course
         },
         Courses: async () => {
-            const courses = await Course.find({})
+            const courses = await findAllCourses()
             return courses
         }
     },
 
     Mutation: {
-        createCourse: async (root, args) => {
-            const course = new Course(args)
-            await course.save()
-
-            return course
+        createCourse: async (root, {course}) => {
+            const newCourse = postCourse(course)
+            return newCourse
         },
         updateQuestion: async (root, {courseId, question}) => {
-            const course = await Course.findById(id)
-            course.questions[question.id] = {...question}
-            
-            await Course.update({_id: course._id}, course)
+            const course = await updateQuestion(courseId, question)
             return course
         }
     }
