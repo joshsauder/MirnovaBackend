@@ -9,20 +9,34 @@ export const course = gql`
     }
 
     type Questions {
-        id: Number!
+        id: Int!
         question: String!
         answer: String
-        points: Number
+        points: Int
         images: [String]!
     }
 
-    type Query {
+    extend type Query {
         Course(id: String!): Course
-        Courses(): [Course]
+        Courses: [Course]
     }
 
-    type Mutation {
-        createCourse(course: Course!): Course!
-        updateQuestion(courseId: Number!, questionId: Number!, question: String, answer: String, points: Number, images: String): Course!
+    input CourseInput {
+        id: String
+        name: String!
+        questions: [QuestionInput]!
+    }
+
+    input QuestionInput {
+        id: Int!
+        question: String!
+        answer: String
+        points: Int
+        images: [String]!
+    }
+
+    extend type Mutation {
+        createCourse(course: CourseInput!): Course!
+        updateQuestion(courseId: String!, questionId: Int!, question: String, answer: String, points: Int, images: String): Course!
     }
 `

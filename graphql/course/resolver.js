@@ -19,10 +19,9 @@ export const courseResolver = {
 
             return course
         },
-        updateQuestion: async (root, {courseId, questionId, question, answer, points, images}) => {
+        updateQuestion: async (root, {courseId, question}) => {
             const course = await Course.findById(id)
-            let question = course.questions[questionId]
-            question = {question, ...answer, ...points, ...images}
+            course.questions[question.id] = {...question}
             
             await Course.update({_id: course._id}, course)
             return course
