@@ -6,18 +6,17 @@ export const course = gql`
         name: String!
         dateAdded: String
         questions: [Questions]!
+        images: [File]
     }
 
     type Questions {
-        questionId: Int!
         question: String!
         answer: String
         points: Int
-        images: [String]!
     }
 
     extend type Query {
-        Course(id: String!): Course
+        Course(name: String!): Course
         Courses: [Course]
     }
 
@@ -27,7 +26,6 @@ export const course = gql`
     }
 
     input QuestionInput {
-        questionId: Int!
         question: String!
         answer: String
         points: Int
@@ -36,6 +34,6 @@ export const course = gql`
 
     extend type Mutation {
         createCourse(course: CourseInput!): Course!
-        updateQuestion(courseId: String!, question: QuestionInput): Course!
+        updateQuestion(courseId: String!, questionNumber: Int!, question: QuestionInput): Course!
     }
 `

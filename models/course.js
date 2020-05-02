@@ -1,14 +1,12 @@
 const mongoose = require('mongoose')
 
 const questions = {
-    questionId: Number,
     question: {
         type: String,
         required: 'Question is Required'
     },
     answer: String,
-    points: Number,
-    images: [String]
+    points: Number
 }
 
 const courseSchema = new mongoose.Schema({

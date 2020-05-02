@@ -1,10 +1,16 @@
-const {findCourseById, findAllCourses, postCourse, updateCourse} = require('../../dao/course')
+const {findCourseByName, 
+    findAllCourses, 
+    postCourse, 
+    updateCourse, 
+    findCourseImages} = require('../../dao/course')
 
 export const courseResolver = {
     Query: {
-        Course: async (root, {id}) => {
-            const course = await findCourseById(id)
-            return course
+        Course: async (root, {name}) => {
+            let resolvedArr = await Promise.all([findAllCourses, findCourseImages])
+            let courses = resolvedArr[0]
+            courses.images = resolvedArr[1]
+            return courses
         },
         Courses: async () => {
             const courses = await findAllCourses()
@@ -17,9 +23,9 @@ export const courseResolver = {
             const newCourse = await postCourse(course)
             return newCourse
         },
-        updateQuestion: async (root, {courseId, question}) => {
+        updateQuestion: async (root, {courseId, questionNumber, question}) => {
             const course = await findCourseById(courseId)
-            course.questions[question.questionId] = {...question}
+            course.questions[questionNumber] = {...question}
 
             const updatedCourse = await updateCourse(course)
             return updatedCourse
