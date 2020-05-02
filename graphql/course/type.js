@@ -2,7 +2,6 @@ const {gql} = require("apollo-server-express")
 
 export const course = gql`
     type Course {
-        _id: String
         name: String!
         dateAdded: String
         questions: [Questions]!
@@ -34,6 +33,6 @@ export const course = gql`
 
     extend type Mutation {
         createCourse(course: CourseInput!): Course!
-        updateQuestion(courseId: String!, questionNumber: Int!, question: QuestionInput): Course!
+        updateQuestion(courseName: String!, questionNumber: Int!, question: QuestionInput): Course!
     }
 `

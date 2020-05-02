@@ -24,8 +24,8 @@ export const courseResolver = {
             const newCourse = await postCourse(course)
             return newCourse
         },
-        updateQuestion: async (root, {courseId, questionNumber, question}) => {
-            const course = await findCourseById(courseId)
+        updateQuestion: async (root, {courseName, questionNumber, question}) => {
+            const course = await findCourseByName(courseName)
             course.questions[questionNumber] = {...question}
 
             const updatedCourse = await updateCourse(course)
