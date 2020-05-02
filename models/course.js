@@ -6,7 +6,8 @@ const questions = {
         required: 'Question is Required'
     },
     answer: String,
-    points: Number
+    points: Number,
+    images: [String]
 }
 
 const courseSchema = new mongoose.Schema({

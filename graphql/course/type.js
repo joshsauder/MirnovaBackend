@@ -12,6 +12,7 @@ export const course = gql`
         question: String!
         answer: String
         points: Int
+        images: [String]
     }
 
     extend type Query {
