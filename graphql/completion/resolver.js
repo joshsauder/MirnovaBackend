@@ -1,6 +1,6 @@
 const {saveCompletion, getCompletion, getCompletions} = require('../../dao/completion')
 
-export const competitionResolver = {
+export const completionResolver = {
     Query: {
         Completion: async (root, {course, user}) => {
             let rec = await getCompletion(course, user)

@@ -1,21 +1,23 @@
 const {gql} = require("apollo-server-express")
 
 export const completion = gql `
-    type Completion{
+    scalar Date
+    
+    type Completion {
         user: String!
         course: String!
-        numberOfTries: Number
+        numberOfTries: Int
         completed: Boolean
-        points: Number!
+        points: Int!
         questionsMissed: [String]
-        dateAttempted: String
+        dateAttempted: Date
     }
 
     input CompletionInput {
         user: String!
         course: String!
         completed: Boolean!
-        points: Number!
+        points: Int!
         questionsMissed: [String]
     }
 

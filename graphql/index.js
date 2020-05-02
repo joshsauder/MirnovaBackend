@@ -6,8 +6,11 @@ const { user } = require('./users/type')
 const { userResolver } = require('./users/resolver')
 const { course } = require('./course/type')
 const { courseResolver } = require('./course/resolver')
+const {completion} = require('./completion/type')
+const {completionResolver} = require('./completion/resolver')
 
-
+const {DateResolver} = require('./datatypes/date')
+ 
 let query = gql`
     type Query {
         _: String
@@ -18,5 +21,5 @@ let query = gql`
     }
 `
 
-export const typeDefs = [query ,user, course]
-export const resolvers = merge(userResolver, courseResolver)
+export const typeDefs = [query ,user, course, completion]
+export const resolvers = merge(userResolver, courseResolver, completionResolver, DateResolver)

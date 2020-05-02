@@ -14,8 +14,10 @@ export const saveCompletion = async (completion) => {
     //add if not exist
     let options = {upsert: true, new: true}
 
-    let rec = new Completion(completion)
-    Completion.findOneAndUpdate({course: rec.course, user: rec.user}, 
-        {rec, $inc: {numberOfTries : 1}}, 
+    let newCompletion = new Completion(completion)
+    let rec = Completion.findOneAndUpdate({course: newCompletion.course, user: newCompletion.user}, 
+        {newCompletion, $inc: {numberOfTries : 1}}, 
         options)
+
+    return rec
 }   

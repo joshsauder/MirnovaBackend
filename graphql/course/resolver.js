@@ -7,10 +7,7 @@ const {findCourseByName,
 export const courseResolver = {
     Query: {
         Course: async (root, {name}) => {
-            let resolvedArr = await Promise.all([findCourseByName(name), findCourseImages(name)])
-            console.log(resolvedArr)
-            let courses = resolvedArr[0]
-            courses.images = resolvedArr[1]
+            let courses = await findCourseByName(name)
             return courses
         },
         Courses: async () => {
