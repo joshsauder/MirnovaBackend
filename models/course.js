@@ -10,7 +10,10 @@ const questions = {
 }
 
 const courseSchema = new mongoose.Schema({
-    name: String,
+    name: {
+        type: String,
+        required: "Name is Required"
+    },
     dateAdded: Date,
     questions: [questions]
 })

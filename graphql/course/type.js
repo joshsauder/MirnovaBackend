@@ -2,11 +2,10 @@ const {gql} = require("apollo-server-express")
 
 export const course = gql`
     type Course {
-        id: String
+        _id: String
         name: String!
         dateAdded: String
         questions: [Questions]!
-        images: [File]
     }
 
     type Questions {
@@ -27,9 +26,9 @@ export const course = gql`
 
     input QuestionInput {
         question: String!
-        answer: String
+        answer: String!
         points: Int
-        images: [String]!
+        images: [String]
     }
 
     extend type Mutation {

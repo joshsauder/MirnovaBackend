@@ -15,5 +15,7 @@ export const saveCompletion = async (completion) => {
     let options = {upsert: true, new: true}
 
     let rec = new Completion(completion)
-    Completion.findOneAndUpdate({course: rec.course, user: rec.user}, {...rec, $inc: {numberOfTries : 1}}, options)
+    Completion.findOneAndUpdate({course: rec.course, user: rec.user}, 
+        {rec, $inc: {numberOfTries : 1}}, 
+        options)
 }   

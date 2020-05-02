@@ -28,10 +28,19 @@ exports.updateCourse = async (course) => {
 
 exports.findCourseImages = async (course) => {
     var params = {
-        Bucket: 'CourseImages',
+        Bucket: 'mirnova-course-images',
         Prefix: course
     }
-
     let data = await s3.listObjectsV2(params).promise()
-    return data.Contents
+
+    return data
+}
+
+exports.fetchCourseImage = (image) => {
+    var params = {
+        Bucket: 'mirnova-course-images',
+        Key: image
+    }
+
+    return s3.getObject(params).promise()
 }
