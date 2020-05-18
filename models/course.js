@@ -19,6 +19,10 @@ const courseSchema = new mongoose.Schema({
     questions: [questions]
 })
 
+courseSchema.virtual('questionCount').get(function(){
+    return this.questions.length
+})
+
 courseSchema.pre('save', () => {
     this.dateAdded = new Date()
 })

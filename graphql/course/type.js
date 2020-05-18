@@ -5,6 +5,7 @@ export const course = gql`
         name: String!
         dateAdded: String
         questions: [Questions]!
+        questionCount: Int
     }
 
     type Questions {
