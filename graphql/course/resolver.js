@@ -1,8 +1,7 @@
 const {findCourseByName, 
     findAllCourses, 
     postCourse, 
-    updateCourse, 
-    findCourseImages} = require('../../dao/course')
+    updateCourse} = require('../../dao/course')
 
 export const courseResolver = {
     Query: {
@@ -23,7 +22,7 @@ export const courseResolver = {
         },
         updateQuestion: async (root, {courseName, questionNumber, question}) => {
             const course = await findCourseByName(courseName)
-            course.questions[questionNumber] = {...question}
+            course.questions[questionNumber] = question
 
             const updatedCourse = await updateCourse(course)
             return updatedCourse
