@@ -5,12 +5,12 @@ export const course = gql`
         name: String!
         dateAdded: String
         questions: [Questions]!
-        questionCount: Int
+        questionCount: Int!
     }
 
     type Questions {
         question: String!
-        answer: String
+        answer: String!
         points: Int
         images: [String]
     }

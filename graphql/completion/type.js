@@ -6,11 +6,11 @@ export const completion = gql `
     type Completion {
         user: String!
         course: String!
-        numberOfTries: Int
-        completed: Boolean
+        numberOfTries: Int!
+        completed: Boolean!
         points: Int!
         questionsMissed: [String]
-        dateAttempted: Date
+        dateAttempted: Date!
     }
 
     input CompletionInput {
