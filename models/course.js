@@ -16,7 +16,8 @@ const courseSchema = new mongoose.Schema({
         required: "Name is Required"
     },
     dateAdded: Date,
-    questions: [questions]
+    questions: [questions],
+    pointsRequired: Number
 })
 
 courseSchema.virtual('questionCount').get(function(){

@@ -6,6 +6,7 @@ export const course = gql`
         dateAdded: String
         questions: [Questions]!
         questionCount: Int!
+        pointsRequired: Int!
     }
 
     type Questions {
@@ -23,6 +24,7 @@ export const course = gql`
     input CourseInput {
         name: String!
         questions: [QuestionInput]!
+        pointsRequired: Int!
     }
 
     input QuestionInput {
