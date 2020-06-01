@@ -9,7 +9,7 @@ export const completion = gql `
         numberOfTries: Int!
         completed: Boolean!
         points: Int!
-        questionsMissed: [String]
+        questionsMissed: [String!]
         dateAttempted: Date!
     }
 
@@ -18,12 +18,12 @@ export const completion = gql `
         course: String!
         completed: Boolean!
         points: Int!
-        questionsMissed: [String]
+        questionsMissed: [String!]
     }
 
     extend type Query {
         Completion(course: String!, user: String!): Completion!
-        Completions(user: String!): [Completion]
+        Completions(user: String!): [Completion!]
     }
 
     extend type Mutation {
