@@ -13,7 +13,8 @@ const questions = {
 const courseSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: "Name is Required"
+        required: "Name is Required",
+        unique: true
     },
     dateAdded: Date,
     questions: [questions],

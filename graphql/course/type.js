@@ -37,5 +37,6 @@ export const course = gql`
     extend type Mutation {
         createCourse(course: CourseInput!): Course!
         updateQuestion(courseName: String!, questionNumber: Int!, question: QuestionInput): Course!
+        updateCourse(course: CourseInput!): Course!
     }
 `

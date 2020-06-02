@@ -26,6 +26,10 @@ export const courseResolver = {
 
             const updatedCourse = await updateCourse(course)
             return updatedCourse
+        },
+        updateCourse: async (root, {course}) => {
+            const updatedCourse = await updateCourse(course)
+            return updatedCourse
         }
     }
 }

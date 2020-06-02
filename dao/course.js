@@ -22,8 +22,8 @@ exports.postCourse = async (course) => {
 }
 
 exports.updateCourse = async (course) => {
-    await Course.update({_id: course._id}, course)
-    return course
+    let updatedCourse = await Course.findOneAndUpdate({name: course.name}, course)
+    return updatedCourse
 }
 
 exports.findCourseImages = async (course) => {
