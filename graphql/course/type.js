@@ -13,7 +13,7 @@ export const course = gql`
         question: String!
         answer: String!
         points: Int
-        images: [String!]
+        image: String!
     }
 
     extend type Query {
@@ -31,7 +31,7 @@ export const course = gql`
         question: String!
         answer: String!
         points: Int
-        images: [String!]
+        images: String!
     }
 
     extend type Mutation {

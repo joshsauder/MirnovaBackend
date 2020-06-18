@@ -1,11 +1,8 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
-//const { ApolloServer, makeExecutableSchema } = require('apollo-server-lambda');
 const routes = require('./routes')
 const {typeDefs, resolvers} = require('./graphql/index')
 const {connectToDB} = require('./utils/connect')
-
-//const schema = makeExecutableSchema({typeDefs: typeDefs, resolvers: resolvers})
 
 //make connection to DB
 connectToDB().then(res => {

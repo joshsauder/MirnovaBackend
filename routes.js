@@ -3,6 +3,6 @@ const router = express.Router()
 
 const {fetchImage} = require('./controller/course')
 
-router.get('/course/images', fetchImage)
+router.get('/course/image', fetchImage)
 
 module.exports = router

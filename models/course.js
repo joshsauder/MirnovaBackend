@@ -7,7 +7,7 @@ const questions = {
     },
     answer: String,
     points: Number,
-    images: [String]
+    image: String
 }
 
 const courseSchema = new mongoose.Schema({
