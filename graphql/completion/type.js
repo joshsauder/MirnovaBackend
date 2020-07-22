@@ -7,6 +7,7 @@ export const completion = gql `
         user: String!
         course: String!
         numberOfTries: Int!
+        average: Float!
         completed: Boolean!
         points: Int!
         questionsMissed: [String!]
@@ -17,6 +18,7 @@ export const completion = gql `
         user: String!
         course: String!
         completed: Boolean!
+        average: Float!
         points: Int!
         questionsMissed: [String!]
     }
