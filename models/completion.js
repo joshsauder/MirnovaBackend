@@ -13,6 +13,10 @@ const completionSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
+    average: {
+        type: Number,
+        default: 0
+    },
     completed: Boolean, 
     points: {
         type: Number,
