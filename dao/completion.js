@@ -29,6 +29,7 @@ const processCompletion = (oldCompletion, newCompletion) => {
 
     newCompletion.points = oldCompletion.points > newCompletion.points ? oldCompletion.points : newCompletion.points
     newCompletion.questionsMissed = oldCompletion.questionsMissed < newCompletion.questionsMissed ? oldCompletion.questionsMissed : newCompletion.questionsMissed
+    newCompletion.completed = newCompletion.completed || oldCompletion.completed
 
     return newCompletion
 }

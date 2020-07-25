@@ -22,7 +22,6 @@ const completionSchema = mongoose.Schema({
         type: Number,
         required: "Points are required"
     },
-    questionsMissed: [String],
     dateAttempted: {
         type: Date,
         default: Date.now

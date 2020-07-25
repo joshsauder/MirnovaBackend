@@ -10,7 +10,6 @@ export const completion = gql `
         average: Float!
         completed: Boolean!
         points: Int!
-        questionsMissed: [String!]
         dateAttempted: Date!
     }
 
@@ -18,9 +17,7 @@ export const completion = gql `
         user: String!
         course: String!
         completed: Boolean!
-        average: Float!
         points: Int!
-        questionsMissed: [String!]
     }
 
     extend type Query {
