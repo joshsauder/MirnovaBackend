@@ -11,13 +11,24 @@ export const getCompletions = async (user) => {
 }
 
 export const saveCompletion = async (completion) => {
-    //add if not exist
-    let options = {upsert: true, new: true}
-
     let newCompletion = new Completion(completion)
-    let rec = Completion.findOneAndUpdate({course: newCompletion.course, user: newCompletion.user}, 
-        {newCompletion, $inc: {numberOfTries : 1}}, 
-        options)
+    let oldCompletion = await Completion.findOne({course: newCompletion.course, user: newCompletion.user})
 
+    if(oldCompletion != null){
+        const recToSave = processCompletion(oldCompletion, newCompletion)
+        Completion.update({user: recToSave.user, course: recToSave.course}, recToSave)
+    }else {
+        oldCompletion.save()
+    }
     return rec
-}   
+}
+
+const processCompletion = (oldCompletion, newCompletion) => {
+    newCompletion.average = ((oldCompletion.average * oldCompletion.numberOfTries) + newCompletion.points) / (oldCompletion.numberOfTries + 1)
+    newCompletion.numberOfTries += 1 
+
+    newCompletion.points = oldCompletion.points > newCompletion.points ? oldCompletion.points : newCompletion.points
+    newCompletion.questionsMissed = oldCompletion.questionsMissed < newCompletion.questionsMissed ? oldCompletion.questionsMissed : newCompletion.questionsMissed
+
+    return newCompletion
+}
