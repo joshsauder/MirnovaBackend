@@ -7,5 +7,6 @@ export const connectToDB = async () => {
     mongoose.connection.on('error', function(err) {
         console.log('Mongoose default connection error: ' + err);
     });
+    mongoose.set('useFindAndModify', false);
     return true;
 }
