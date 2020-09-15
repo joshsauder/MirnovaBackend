@@ -17,6 +17,7 @@ const courseSchema = new mongoose.Schema({
         unique: true
     },
     dateAdded: Date,
+    image: String,
     questions: [questions],
     pointsRequired: Number
 })
