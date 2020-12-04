@@ -5,14 +5,12 @@ export const user = gql`
         id: ID!
         email: String!
         name: String!
-        age: String!
         createdDate: String!
     }
 
     input InputUser { 
         email: String!
         name: String!
-        age: String!
     }
 
     extend type Query {
