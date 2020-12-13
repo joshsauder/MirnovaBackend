@@ -7,7 +7,6 @@ exports.findUserByEmail = async (email) => {
 
 exports.saveUser = async (user) => {
     const newUser = new User(user)
-    await newUser.save()
 
-    return newUser
+    return await newUser.save()
 }

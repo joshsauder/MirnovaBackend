@@ -1,6 +1,5 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
-const routes = require('./routes')
 const {typeDefs, resolvers} = require('./graphql/index')
 const {connectToDB} = require('./utils/connect')
 
@@ -18,7 +17,6 @@ connectToDB().then(res => {
   })
 
   const app = express();
-  app.use('/api', routes)
 
   server.applyMiddleware({ app });
 
