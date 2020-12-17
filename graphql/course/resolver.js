@@ -3,7 +3,7 @@ const {findCourseByName,
     postCourse, 
     updateCourse} = require('../../dao/course')
 
-export const courseResolver = {
+exports.courseResolver = {
     Query: {
         Course: async (root, {name}) => {
             let courses = await findCourseByName(name)

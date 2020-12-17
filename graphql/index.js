@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-lambda'
+const { gql } = require('apollo-server-lambda')
 
 const { merge } = require('lodash') 
 
@@ -21,5 +21,5 @@ let query = gql`
     }
 `
 
-export const typeDefs = [query ,user, course, completion]
-export const resolvers = merge(userResolver, courseResolver, completionResolver, DateResolver)
+exports.typeDefs = [query ,user, course, completion]
+exports.resolvers = merge(userResolver, courseResolver, completionResolver, DateResolver)

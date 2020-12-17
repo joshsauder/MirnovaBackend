@@ -1,6 +1,6 @@
 const {gql} = require("apollo-server-express")
 
-export const completion = gql `
+exports.completion = gql `
     scalar Date
     
     type Completion {

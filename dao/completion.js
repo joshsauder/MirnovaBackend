@@ -1,19 +1,16 @@
-import completion from '../models/completion';
-import { Mongoose } from 'mongoose';
-
 const Completion = require('../models/completion')
 
-export const getCompletion = async (course, user) => {
+exports.getCompletion = async (course, user) => {
     let rec = await Completion.findOne({course: course, user: user})
     return rec;
 }
 
-export const getCompletions = async (user) => {
+exports.getCompletions = async (user) => {
     let rec = await Completion.find({user: user})
     return rec;
 }
 
-export const saveCompletion = async (completion) => {
+exports.saveCompletion = async (completion) => {
     let newCompletion = new Completion(completion)
     let oldCompletion = await Completion.findOne({course: newCompletion.course, user: newCompletion.user})
 

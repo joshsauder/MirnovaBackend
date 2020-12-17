@@ -1,6 +1,6 @@
 const {findUserByEmail, saveUser} = require('../../dao/user')
 
-export const userResolver = {
+exports.userResolver = {
     Query: {
         User: async (root, {email}) => {
             const user = await findUserByEmail(email)

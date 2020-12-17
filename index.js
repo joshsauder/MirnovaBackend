@@ -13,18 +13,18 @@ const {typeDefs, resolvers} = require('./graphql/index')
 const {connectToDB} = require('./utils/connect')
 
 //make connection to DB
-await connectToDB();
+//connectToDB();
 
-const server = new ApolloServer({
-  typeDefs: typeDefs, 
-  resolvers: resolvers,
-  // playground: {
-  //   endpoint: `http://localhost:4000/graphql`,
-  //   settings: {
-  //     'editor.theme': 'dark'
-  //   }
-  // }
-})
+// const server = new ApolloServer({
+//   typeDefs: typeDefs, 
+//   resolvers: resolvers,
+//   playground: {
+//      endpoint: `http://localhost:4000/graphql`,
+//      settings: {
+//        'editor.theme': 'dark'
+//      }
+//    }
+// })
 
   // const app = express();
 
@@ -34,5 +34,10 @@ const server = new ApolloServer({
   //   console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
   // );
 
+
+exports.graphqlHandler = async (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+  await connectToDB();
   const server = new ApolloServer({ typeDefs, resolvers });
-  exports.graphqlHandler = server.createHandler();
+  return server.createHandler();
+}

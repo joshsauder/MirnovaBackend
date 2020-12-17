@@ -1,6 +1,6 @@
 const {gql} = require("apollo-server-express")
 
-export const course = gql`
+exports.course = gql`
     type Course {
         name: String!
         dateAdded: String
