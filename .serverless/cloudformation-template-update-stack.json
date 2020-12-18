@@ -144,7 +144,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/MirnovaBackend/dev/1608182743462-2020-12-17T05:25:43.462Z/MirnovaBackend.zip"
+          "S3Key": "serverless/MirnovaBackend/dev/1608267790458-2020-12-18T05:03:10.458Z/MirnovaBackend.zip"
         },
         "FunctionName": "MirnovaBackend-dev-graphql",
         "Handler": "index.graphqlHandler",
@@ -163,14 +163,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "GraphqlLambdaVersionvv9Vw0LNkxCyU5M72Ve4josIobYDvNu6mj7OtCqhy8": {
+    "GraphqlLambdaVersionzeQVNQQ04AIzK8Arm9nYGmG95wOXOPazwTWh9UxIxw": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GraphqlLambdaFunction"
         },
-        "CodeSha256": "JbnXHgBb3/eP8M/XjNLIKICPSah7UfzuXSEkQASgY2s="
+        "CodeSha256": "0IfklH5PSgLK5mpbbtyGUXV++OI/pZGRYQmk6JdZyz4="
       }
     },
     "ApiGatewayRestApi": {
@@ -331,7 +331,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1608182729155": {
+    "ApiGatewayDeployment1608267764957": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -392,7 +392,7 @@
     "GraphqlLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GraphqlLambdaVersionvv9Vw0LNkxCyU5M72Ve4josIobYDvNu6mj7OtCqhy8"
+        "Ref": "GraphqlLambdaVersionzeQVNQQ04AIzK8Arm9nYGmG95wOXOPazwTWh9UxIxw"
       }
     },
     "ServiceEndpoint": {

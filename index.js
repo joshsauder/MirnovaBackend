@@ -33,11 +33,19 @@ const {connectToDB} = require('./utils/connect')
   // app.listen({ port: 4000 }, () =>
   //   console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
   // );
+const server = new ApolloServer({ 
+  typeDefs, 
+  resolvers, 
+  playground: {
+    endpoint: "/dev/graphql"
+  }
+});
 
+const graphQLHandler = server.createHandler()
 
-exports.graphqlHandler = async (event, context, callback) => {
-  context.callbackWaitsForEmptyEventLoop = false;
-  await connectToDB();
-  const server = new ApolloServer({ typeDefs, resolvers });
-  return server.createHandler();
+exports.graphqlHandler = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false
+
+  connectToDB()
+  .then(() => graphQLHandler(event, context, callback))
 }
