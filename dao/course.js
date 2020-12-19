@@ -16,6 +16,7 @@ exports.findAllCourses = async () => {
 
 exports.postCourse = async (course) => {
     const newCourse = new Course(course)
+    const jsonData = newCourse.toJSON()
 
     return await newCourse.save()
 }
