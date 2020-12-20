@@ -1,29 +1,26 @@
 const Course = require('../models/course')
-const AWS = require('aws-sdk')
-
-AWS.config.update({region: 'us-east-1'});
-const s3 = new AWS.S3({apiVersion: '2006-03-01'});
+const { dynamo, s3 } = require('../index')
 
 exports.findCourseByName = async (name) => {
-    const course = await Course.findOne({name: name})
-    return course
+    let params = {
+        TableName: 'User',
+        Key: { name: name }
+    };
+
+    const course = await dynamo.get(params).promise()
+    return course.Item
 }
 
 exports.findAllCourses = async () => {
-    const courses = await Course.find({})
-    return courses
+    const courses = await dynamo.scan(params).promise()
+    return courses.Items
 }
 
 exports.postCourse = async (course) => {
-    const newCourse = new Course(course)
-    const jsonData = newCourse.toJSON()
+    const item = Course(course)
+    await dynamo.put(item).promise()
 
-    return await newCourse.save()
-}
-
-exports.updateCourse = async (course) => {
-    let updatedCourse = await Course.findOneAndUpdate({name: course.name}, course)
-    return updatedCourse
+    return item.Item
 }
 
 exports.findCourseImages = async (course) => {

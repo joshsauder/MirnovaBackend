@@ -9,11 +9,8 @@
 //const express = require('express');
 //const { ApolloServer } = require('apollo-server-express');
 const { ApolloServer } = require('apollo-server-lambda');
+const AWS = require('aws-sdk')
 const {typeDefs, resolvers} = require('./graphql/index')
-const {connectToDB} = require('./utils/connect')
-
-//make connection to DB
-//connectToDB();
 
 // const server = new ApolloServer({
 //   typeDefs: typeDefs, 
@@ -33,6 +30,11 @@ const {connectToDB} = require('./utils/connect')
   // app.listen({ port: 4000 }, () =>
   //   console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
   // );
+
+AWS.config.update({region: 'us-east-1'});
+exports.dynamo = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
+exports.s3 = new AWS.S3({apiVersion: '2012-08-10'})
+
 const server = new ApolloServer({ 
   typeDefs, 
   resolvers, 
@@ -41,11 +43,4 @@ const server = new ApolloServer({
   }
 });
 
-const graphQLHandler = server.createHandler()
-
-exports.graphqlHandler = (event, context, callback) => {
-  context.callbackWaitsForEmptyEventLoop = false
-
-  connectToDB()
-  .then(() => graphQLHandler(event, context, callback))
-}
+exports.graphqlHandler = server.createHandler()

@@ -1,27 +1,45 @@
+const { dynamo } = require('../index')
 const Completion = require('../models/completion')
 
 exports.getCompletion = async (course, user) => {
-    let rec = await Completion.findOne({course: course, user: user})
-    return rec;
+    const params = {
+        TableName: 'Completion',
+        Key: { course: course, user: user}
+    }
+
+    const item = await dynamo.get(params).promise()
+    return item.Item;
 }
 
 exports.getCompletions = async (user) => {
-    let rec = await Completion.find({user: user})
-    return rec;
+    var params = {
+        TableName: 'Completion',
+        FilterExpression: '#s = :user',
+        ExpressionAttributeValues: { ':user': user },
+        ExpressionAttributeNames: { '#s': 'user' },
+    }
+
+    let recs = await dynamo.scan(params).promise()
+    return recs.Items;
 }
 
 exports.saveCompletion = async (completion) => {
-    let newCompletion = new Completion(completion)
-    let oldCompletion = await Completion.findOne({course: newCompletion.course, user: newCompletion.user})
+    const params = {
+        TableName: 'Completion',
+        Key: { course: completion.course, user: completion.user}
+    }
+    
 
+    let oldCompletion = (await dynamo.get(params).promise()).Item
+    let newCompletion;
     if(oldCompletion == null){
-        newCompletion = generateCompletion(newCompletion)
+        newCompletion = new Completion(generateCompletion(completion))
     } else{
-        newCompletion = processCompletion(oldCompletion, newCompletion)
+        newCompletion = new Completion(processCompletion(completion, newCompletion.Item))
     } 
 
-    await Completion.findOneAndUpdate({user: newCompletion.user, course: newCompletion.course}, newCompletion, {upsert: true})
-    return newCompletion
+    await dynamo.put(newCompletion)
+    return newCompletion.Item
 }
 
 const generateCompletion = (completion) => {
