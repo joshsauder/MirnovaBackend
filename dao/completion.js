@@ -1,5 +1,6 @@
-const { dynamo } = require('../index')
 const Completion = require('../models/completion')
+const Database = require('./database')
+const dynamo = new Database()
 
 exports.getCompletion = async (course, user) => {
     const params = {
@@ -7,7 +8,7 @@ exports.getCompletion = async (course, user) => {
         Key: { course: course, user: user}
     }
 
-    const item = await dynamo.get(params).promise()
+    const item = await dynamo.getItem(params)
     return item.Item;
 }
 
@@ -19,7 +20,7 @@ exports.getCompletions = async (user) => {
         ExpressionAttributeNames: { '#s': 'user' },
     }
 
-    let recs = await dynamo.scan(params).promise()
+    let recs = await dynamo.scan(params)
     return recs.Items;
 }
 
@@ -30,15 +31,15 @@ exports.saveCompletion = async (completion) => {
     }
     
 
-    let oldCompletion = (await dynamo.get(params).promise()).Item
+    let oldCompletion = (await dynamo.getItem(params)).Item
     let newCompletion;
     if(oldCompletion == null){
-        newCompletion = new Completion(generateCompletion(completion))
+        newCompletion = Completion(generateCompletion(completion))
     } else{
-        newCompletion = new Completion(processCompletion(completion, newCompletion.Item))
+        newCompletion = Completion(processCompletion(completion, newCompletion.Item))
     } 
 
-    await dynamo.put(newCompletion)
+    await dynamo.putItem(newCompletion)
     return newCompletion.Item
 }
 

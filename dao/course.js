@@ -1,24 +1,27 @@
 const Course = require('../models/course')
-const { dynamo, s3 } = require('../index')
+const AWS = require('aws-sdk')
+const s3 = new AWS.S3({apiVersion: '2012-08-10'})
+const Database = require('./database')
+const dynamo = new Database()
 
 exports.findCourseByName = async (name) => {
     let params = {
-        TableName: 'User',
+        TableName: 'Course',
         Key: { name: name }
     };
 
-    const course = await dynamo.get(params).promise()
+    const course = await dynamo.getItem(params)
     return course.Item
 }
 
 exports.findAllCourses = async () => {
-    const courses = await dynamo.scan(params).promise()
+    const courses = await dynamo.scan(params)
     return courses.Items
 }
 
 exports.postCourse = async (course) => {
     const item = Course(course)
-    await dynamo.put(item).promise()
+    await dynamo.putItem(item)
 
     return item.Item
 }

@@ -1,8 +1,9 @@
-export default User = (user) => {
+module.exports = (user, id) => {
     return {
         TableName: 'User',
         Item: {
-            ...user, 
+            ...user,
+            ID: id,
             createdDate: new Date()
         }
     }

@@ -1,4 +1,4 @@
-export default Completion = (completion) => {
+module.exports = (completion) => {
     return {
         TableName: "Completion",
         Item: {

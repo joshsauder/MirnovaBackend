@@ -1,4 +1,4 @@
-export default Course = (course) => {
+module.exports = (course) => {
     return {
         TableName: 'Course',
         Item: {

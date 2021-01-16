@@ -32,8 +32,6 @@ const {typeDefs, resolvers} = require('./graphql/index')
   // );
 
 AWS.config.update({region: 'us-east-1'});
-exports.dynamo = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
-exports.s3 = new AWS.S3({apiVersion: '2012-08-10'})
 
 const server = new ApolloServer({ 
   typeDefs, 
