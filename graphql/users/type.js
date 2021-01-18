@@ -2,7 +2,7 @@ const {gql} = require("apollo-server-express")
 
 exports.user = gql`
     type User {
-        id: ID!
+        ID: ID!
         email: String!
         name: String!
         createdDate: String!
