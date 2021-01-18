@@ -15,8 +15,20 @@ exports.findCourseByName = async (name) => {
 }
 
 exports.findAllCourses = async () => {
+    let params = {
+        TableName: 'Course',
+    };
+
     const courses = await dynamo.scan(params)
-    return courses.Items
+
+    const ret = courses.Items.map(item => {
+        return {
+            ...item,
+            questionCount: item.questions.length
+        }
+    })
+
+    return ret
 }
 
 exports.postCourse = async (course) => {
