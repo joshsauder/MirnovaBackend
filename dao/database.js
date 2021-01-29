@@ -14,7 +14,6 @@ class Database {
     }
 
     async putItem(params) {
-        console.log(params)
         return new Promise((resolve, reject) => {
             this._connection.put(params, (err, data) => {
                 if (err) {

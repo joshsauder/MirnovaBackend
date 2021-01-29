@@ -36,8 +36,9 @@ exports.saveCompletion = async (completion) => {
     if(oldCompletion == null){
         newCompletion = Completion(generateCompletion(completion))
     } else{
-        newCompletion = Completion(processCompletion(completion, newCompletion.Item))
+        newCompletion = Completion(processCompletion(oldCompletion, completion))
     } 
+
 
     await dynamo.putItem(newCompletion)
     return newCompletion.Item
@@ -45,7 +46,7 @@ exports.saveCompletion = async (completion) => {
 
 const generateCompletion = (completion) => {
     completion.average = completion.points
-    completion.numberOfTries += 1 
+    completion.numberOfTries = 1
 
     return completion
 }
