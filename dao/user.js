@@ -13,8 +13,13 @@ exports.findUserByEmail = async (email) => {
 }
 
 exports.saveUser = async (user) => {
-    const newUser = User(user, v4())
-    await dynamo.putItem(newUser)
+    var fetchedUser = await this.findUserByEmail(user.email);
 
-    return newUser.Item
+    if(fetchedUser === undefined) {
+        const newUser = User(user, v4())
+        await dynamo.putItem(newUser) 
+        fetchedUser = newUser.Item
+    }
+
+    return fetchedUser
 }
